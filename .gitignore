@@ -1,0 +1,52 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore build directories
+dist/
+build/
+
+# Ignore environment variable files
+.env
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore coverage reports
+coverage/
+.nyc_output/
+
+# Ignore dependency directories
+jspm_packages/
+bower_components/
+
+# Ignore compiled files
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.swp
+*.swo
+*.pid
+*.seed
+*.pid.lock
