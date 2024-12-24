@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import { RequestValidationError } from "../errors/request-validation-error";
 import { User } from "../models/user";
+import { BadRequestError } from "../errors/bad-request-error";
 
 const router = express.Router();
 
@@ -24,9 +25,7 @@ router.post(
     const { email, password } = req.body;
     const existingUser = await User.findOne({email})
     if (existingUser) {
-      console.log("Email existing already!")
-      res.send({})
-      return
+      throw new BadRequestError("User email already exists!!!")
     }
 
     const user = User.build({email, password})
