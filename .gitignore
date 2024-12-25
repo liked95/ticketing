@@ -55,3 +55,6 @@ bower_components/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+
+# Ignore NEXT
+.next
