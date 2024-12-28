@@ -8,8 +8,8 @@ export default ({ currentUser }) => {
     ]
         .filter(linkConfig => linkConfig)
         .map(({ label, href }) => {
-            return <li className="nav-item">
-                <Link href={href} key={href} className="nav-link">
+            return <li className="nav-item" key={href}>
+                <Link href={href} className="nav-link">
                     {label}
                 </Link>
             </li>
