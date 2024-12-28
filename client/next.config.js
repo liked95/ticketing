@@ -1,6 +1,9 @@
 module.exports = {
     webpack: (config) => {
-        config.watchOptions.poll = 300;
+        config.watchOptions = {
+            ignored: /node_modules/,
+            aggregateTimeout: 300,
+        };
         return config;
     },
 };
