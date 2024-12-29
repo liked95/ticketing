@@ -22,8 +22,16 @@ spec:
             "-hbt", "5s", 
             "-hbf", "2",
             "-SD",
-            "-cid", "ticketing"
+            "-cid", "ticketing",
+            "-DV"
           ]
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
