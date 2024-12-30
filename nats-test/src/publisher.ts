@@ -11,7 +11,7 @@ stan.on('connect', () => {
     console.log('🎈🎈🎈🎈🎈 Publisher connected to NATS')
     const data = JSON.stringify({
         id: '123',
-        title: '1 change from publisher',
+        title: 'Handle publish from another file',
         price: 20
     })
 
