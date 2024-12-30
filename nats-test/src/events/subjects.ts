@@ -1,4 +1,4 @@
-export enum Subject {
+export enum Subjects {
     TicketCreated = 'ticket:created',
     OrderUpdated = 'order:updated',
 }
