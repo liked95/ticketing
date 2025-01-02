@@ -29,6 +29,8 @@ app.use(updateTicketRouter)
 app.all("*", async (req, res, next) => {
   throw new NotFoundError();
 });
+
+// @ts-ignore
 app.use(errorHandler);
 
 export { app };
