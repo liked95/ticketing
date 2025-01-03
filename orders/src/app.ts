@@ -1,4 +1,4 @@
-import {errorHandler, NotFoundError} from '@sonnytickets/common'
+import {errorHandler, getCurrentUser, NotFoundError} from '@sonnytickets/common'
 
 import cookieSession from 'cookie-session'
 import express from 'express'
@@ -19,6 +19,7 @@ app.use(
   })
 )
 
+app.use(getCurrentUser)
 app.use(indexOrderRouter)
 app.use(newOrderRouter)
 app.use(deleteOrderRouter)
