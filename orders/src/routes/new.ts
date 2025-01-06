@@ -55,7 +55,7 @@ router.post(
       id: order.id,
       status: order.status,
       userId: order.userId,
-      expiresAt: expiration.toISOString(), 
+      expiresAt: order.expiresAt.toISOString(), 
       ticket: {
         id: ticket.id,
         price: ticket.price,

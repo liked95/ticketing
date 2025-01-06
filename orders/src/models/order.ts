@@ -31,7 +31,7 @@ const orderSchema = new mongoose.Schema(
       enum: Object.values(OrderStatus),
       default: OrderStatus.Created,
     },
-    expiredAt: {
+    expiresAt: {
       type: mongoose.Schema.Types.Date,
     },
     ticket: {
