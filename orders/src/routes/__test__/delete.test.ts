@@ -2,7 +2,8 @@ import request from 'supertest'
 import {app} from '../../app'
 import {Ticket} from '../../models/ticket'
 import {OrderStatus} from '@sonnytickets/common'
-import { natsWrapper } from '../../__mocks__/nats-wrapper'
+import { natsWrapper } from '../../nats-wrapper'
+
 
 it('marks on order as cancelled', async () => {
   const ticket = Ticket.build({title: 'Fireflies', price: 20})
