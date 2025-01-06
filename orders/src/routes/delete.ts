@@ -1,7 +1,7 @@
 import {NotAuthorizedError, NotFoundError, OrderStatus, requireAuth} from '@sonnytickets/common'
 import express, {Request, Response} from 'express'
 import {Order} from '../models/order'
-import {OrderCancelledPublisher} from '../../events/publishers/order-cancelled-publisher'
+import {OrderCancelledPublisher} from '../events/publishers/order-cancelled-publisher'
 import {natsWrapper} from '../nats-wrapper'
 
 const router = express.Router()

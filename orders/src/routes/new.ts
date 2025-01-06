@@ -4,7 +4,7 @@ import {body} from 'express-validator'
 import mongoose from 'mongoose'
 import {Ticket} from '../models/ticket'
 import {Order, OrderStatus} from '../models/order'
-import {OrderCreatedPublisher} from '../../events/publishers/order-created-publisher'
+import {OrderCreatedPublisher} from '../events/publishers/order-created-publisher'
 import {natsWrapper} from '../nats-wrapper'
 
 const EXPIRATION_WINDOW_SECONDS = 15 * 60
