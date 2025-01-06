@@ -3,7 +3,7 @@ import {app} from '../../app'
 import request from 'supertest'
 import {Ticket} from '../../models/ticket'
 import {Order, OrderStatus} from '../../models/order'
-import { natsWrapper } from '../../__mocks__/nats-wrapper'
+import { natsWrapper } from '../../nats-wrapper'
 
 
 
