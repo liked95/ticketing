@@ -32,7 +32,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@sonnytickets/common": "^1.0.17",
+    "@sonnytickets/common": "^1.0.18",
     "body-parser": "^1.20.3",
     "cookie-session": "^2.1.0",
     "express": "^4.21.2",
@@ -40,6 +40,7 @@
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.2",
+    "mongoose-update-if-current": "^1.4.0",
     "node-nats-streaming": "^0.3.2"
   }
 }
