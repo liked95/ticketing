@@ -47,7 +47,7 @@ ticketSchema.plugin(updateIfCurrentPlugin)
 
 ticketSchema.statics.findByEvent = (event: {id: string; version: number}) => {
   const {id, version} = event
-  return Ticket.find({_id: id, version: version - 1})
+  return Ticket.findOne({_id: id, version: version - 1})
 }
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
