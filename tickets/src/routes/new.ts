@@ -4,6 +4,7 @@ import { body } from "express-validator";
 import { Ticket } from "../models/ticket";
 import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
 import { natsWrapper } from "../nats-wrapper";
+import { version } from "mongoose";
 
 const router = express.Router();
 
@@ -27,7 +28,8 @@ router.post(
       id: ticket.id,
       title: ticket.title,
       price: ticket.price,
-      userId: ticket.userId
+      userId: ticket.userId,
+      version : ticket.version
     })
 
     res.status(201).send(ticket);
