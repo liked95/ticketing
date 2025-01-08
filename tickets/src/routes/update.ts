@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express'
 import {Ticket} from '../models/ticket'
 import {NotAuthorizedError, NotFoundError, requireAuth, validateRequest} from '@sonnytickets/common'
 import {body} from 'express-validator'
-import {TicketUpdatedPublisher} from '../events/publishers/ticket-update-publisher'
+import {TicketUpdatedPublisher} from '../events/publishers/ticket-updated-publisher'
 import {natsWrapper} from '../nats-wrapper'
 
 const router = express.Router()
