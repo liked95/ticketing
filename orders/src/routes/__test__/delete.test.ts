@@ -2,11 +2,15 @@ import request from 'supertest'
 import {app} from '../../app'
 import {Ticket} from '../../models/ticket'
 import {OrderStatus} from '@sonnytickets/common'
-import { natsWrapper } from '../../nats-wrapper'
-
+import {natsWrapper} from '../../nats-wrapper'
+import mongoose from 'mongoose'
 
 it('marks on order as cancelled', async () => {
-  const ticket = Ticket.build({title: 'Fireflies', price: 20})
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'Fireflies',
+    price: 20,
+  })
   await ticket.save()
 
   const user = global.signin()
@@ -24,7 +28,11 @@ it('marks on order as cancelled', async () => {
 })
 
 it('not allow user1 to cancel order of another user', async () => {
-  const ticket = Ticket.build({title: 'Fireflies', price: 20})
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'Fireflies',
+    price: 20,
+  })
   await ticket.save()
 
   const user1 = global.signin()
@@ -43,7 +51,11 @@ it('not allow user1 to cancel order of another user', async () => {
 })
 
 it('emits an order cancelled event', async () => {
-  const ticket = Ticket.build({title: 'Fireflies', price: 20})
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'Fireflies',
+    price: 20,
+  })
   await ticket.save()
 
   await request(app)

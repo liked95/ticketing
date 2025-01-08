@@ -1,9 +1,14 @@
 import request from 'supertest'
 import {Ticket} from '../../models/ticket'
 import {app} from '../../app'
+import mongoose from 'mongoose'
 
 it('fetch an order', async () => {
-  const ticket = Ticket.build({title: 'Fireflies', price: 20})
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'Fireflies',
+    price: 20,
+  })
   await ticket.save()
 
   const user = global.signin()
@@ -17,7 +22,11 @@ it('fetch an order', async () => {
 })
 
 it('user 1 cannot fetch an order of another user', async () => {
-  const ticket = Ticket.build({title: 'Fireflies', price: 20})
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'Fireflies',
+    price: 20,
+  })
   await ticket.save()
 
   const user1 = global.signin()

@@ -13,7 +13,7 @@ const setup = async () => {
   const ticket = Ticket.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: 'hello pagefly',
-    price: 20
+    price: 20,
   })
 
   await ticket.save()
@@ -33,19 +33,20 @@ const setup = async () => {
     ack: jest.fn(),
   }
 
-  return {listener, data, msg}
+  return {listener, data, msg, ticket}
 }
 it('finds, updates, and saves ticket', async () => {
   // call the onMessage function with the data object + message object
-  const {listener, data, msg} = await setup()
+  const {listener, data, msg, ticket} = await setup()
 
   // write assertions to make sure the ticket was created
   await listener.onMessage(data, msg)
-  const ticket = await Ticket.findById(data.id)
+  const updatedTicket = await Ticket.findById(data.id)
 
-  expect(ticket).toBeDefined()
-  expect(ticket!.title).toEqual('updated title')
-  expect(ticket!.price).toEqual(50)
+  expect(updatedTicket).toBeDefined()
+  expect(updatedTicket!.title).toEqual(data.title)
+  expect(updatedTicket!.price).toEqual(data.price)
+  expect(updatedTicket!.version).toEqual(data.version)
 })
 
 it('acks the message', async () => {
@@ -56,4 +57,14 @@ it('acks the message', async () => {
   await listener.onMessage(data, msg)
 
   expect(msg.ack).toHaveBeenCalled()
+})
+
+it('does not call ack if event has a skipped version number', async () => {
+  const {listener, data, msg, ticket} = await setup()
+  data.version = 3
+
+  try {
+    await listener.onMessage(data, msg)
+  } catch (error) {}
+  expect(msg.ack).not.toHaveBeenCalled()
 })

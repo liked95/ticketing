@@ -3,9 +3,7 @@ import {app} from '../../app'
 import request from 'supertest'
 import {Ticket} from '../../models/ticket'
 import {Order, OrderStatus} from '../../models/order'
-import { natsWrapper } from '../../nats-wrapper'
-
-
+import {natsWrapper} from '../../nats-wrapper'
 
 it('return errors if the ticket does not exist', async () => {
   const ticketId = new mongoose.Types.ObjectId()
@@ -13,7 +11,11 @@ it('return errors if the ticket does not exist', async () => {
 })
 
 it('return errors if the ticket has been reserved', async () => {
-  const ticket = Ticket.build({title: 'Fireflies', price: 20})
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'Fireflies',
+    price: 20,
+  })
   await ticket.save()
 
   const order = Order.build({
@@ -33,7 +35,11 @@ it('return errors if the ticket has been reserved', async () => {
 })
 
 it('reserves a ticket', async () => {
-  const ticket = Ticket.build({title: 'Fireflies', price: 20})
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'Fireflies',
+    price: 20,
+  })
   await ticket.save()
 
   await request(app)
@@ -44,7 +50,11 @@ it('reserves a ticket', async () => {
 })
 
 it('emits an order created event', async () => {
-  const ticket = Ticket.build({title: 'Fireflies', price: 20})
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'Fireflies',
+    price: 20,
+  })
   await ticket.save()
 
   await request(app)
