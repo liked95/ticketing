@@ -1,21 +1,30 @@
-import {TicketCreatedEvent} from '@sonnytickets/common'
 import {natsWrapper} from '../../../nats-wrapper'
-import {TicketCreatedListener} from '../ticket-created-listener'
 import mongoose from 'mongoose'
 import {Message} from 'node-nats-streaming'
 import {Ticket} from '../../../models/ticket'
+import {TicketUpdatedListener} from '../ticket-updated-listener'
+import {TicketUpdatedEvent} from '@sonnytickets/common'
 
 const setup = async () => {
   // creates an instance of the listener
-  const listener = new TicketCreatedListener(natsWrapper.client)
+  const listener = new TicketUpdatedListener(natsWrapper.client)
+
+  // create and save a ticket
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'hello pagefly',
+    price: 20
+  })
+
+  await ticket.save()
 
   // create a fake data event
-  const data: TicketCreatedEvent['data'] = {
-    version: 0,
-    id: new mongoose.Types.ObjectId().toHexString(),
-    title: 'concert',
-    price: 10,
-    userId: new mongoose.Types.ObjectId().toHexString(),
+  const data: TicketUpdatedEvent['data'] = {
+    id: ticket.id,
+    version: ticket.version + 1,
+    title: 'updated title',
+    price: 50,
+    userId: 'ahaha',
   }
 
   // create a fake message object
@@ -26,7 +35,7 @@ const setup = async () => {
 
   return {listener, data, msg}
 }
-it('creates an saves a ticket', async () => {
+it('finds, updates, and saves ticket', async () => {
   // call the onMessage function with the data object + message object
   const {listener, data, msg} = await setup()
 
@@ -35,8 +44,8 @@ it('creates an saves a ticket', async () => {
   const ticket = await Ticket.findById(data.id)
 
   expect(ticket).toBeDefined()
-  expect(ticket!.title).toEqual(data.title)
-  expect(ticket!.price).toEqual(data.price)
+  expect(ticket!.title).toEqual('updated title')
+  expect(ticket!.price).toEqual(50)
 })
 
 it('acks the message', async () => {
