@@ -8,10 +8,14 @@ import { getCurrentUser } from '@sonnytickets/common';
 import { showTicketRouter } from "./routes/show";
 import { indexTicketRouter } from "./routes";
 import { updateTicketRouter } from "./routes/update";
+import morgan from 'morgan'
+
 
 const app = express();
 
 app.set("trust proxy", true);
+app.use(morgan('dev'))
+
 app.use(json());
 app.use(
   cookieSession({

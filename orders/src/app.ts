@@ -7,10 +7,13 @@ import {indexOrderRouter} from './routes'
 import {newOrderRouter} from './routes/new'
 import {deleteOrderRouter} from './routes/delete'
 import {showOrderRouter} from './routes/show'
+import morgan from 'morgan'
 
 const app = express()
 
 app.set('trust proxy', true)
+app.use(morgan('dev'))
+
 app.use(express.json())
 app.use(
   cookieSession({
