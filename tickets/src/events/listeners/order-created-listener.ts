@@ -19,6 +19,7 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     }
 
     ticket.set({orderId: data.id})
+    await ticket.save()
     
     await new TicketUpdatedPublisher(this.client).publish({
       id: ticket.id,
@@ -29,7 +30,6 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
       version: ticket.version,
     })
 
-    await ticket.save()
     msg.ack()
   }
 }
