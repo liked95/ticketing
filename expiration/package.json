@@ -26,7 +26,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@sonnytickets/common": "^1.0.21",
+    "@sonnytickets/common": "^1.0.22",
     "bull": "^4.16.5",
     "node-nats-streaming": "^0.3.2"
   }
