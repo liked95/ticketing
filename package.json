@@ -6,7 +6,11 @@
     "prettier": "^3.4.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "update-lib-auth": "cd auth && yarn add @sonnytickets/common",
+    "update-lib-tickets": "cd tickets && yarn add @sonnytickets/common",
+    "update-lib-orders": "cd orders && yarn add @sonnytickets/common",
+    "update-lib-expiration": "cd expiration && yarn add @sonnytickets/common",
+    "update-lib": "npm run update-lib-auth && npm run update-lib-tickets && npm run update-lib-orders && npm run update-lib-payments && npm run update-lib-expiration"
   },
   "keywords": [],
   "author": "",
