@@ -24,7 +24,8 @@ it('marks on order as cancelled', async () => {
 
   const {body} = await request(app).get(`/api/orders/${order.id}`).set('Cookie', user).expect(200)
 
-  expect(body.order.status).toEqual(OrderStatus.Cancelled)
+  console.log("🚀 ~ it ~ body:", body)
+  expect(body.status).toEqual(OrderStatus.Cancelled)
 })
 
 it('not allow user1 to cancel order of another user', async () => {
@@ -47,7 +48,7 @@ it('not allow user1 to cancel order of another user', async () => {
 
   const {body} = await request(app).get(`/api/orders/${order.id}`).set('Cookie', user1).expect(200)
 
-  expect(body.order.status).toEqual(OrderStatus.Created)
+  expect(body.status).toEqual(OrderStatus.Created)
 })
 
 it('emits an order cancelled event', async () => {
