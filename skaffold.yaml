@@ -8,9 +8,9 @@ build:
   # local:
   #   push: false
   googleCloudBuild:
-    projectId: ticketing-dev-445311
+    projectId: sonny-ticket
   artifacts:
-    - image: us.gcr.io/ticketing-dev-445311/auth
+    - image: us.gcr.io/sonny-ticket/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -18,7 +18,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/ticketing-dev-445311/client
+    - image: us.gcr.io/sonny-ticket/client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -26,7 +26,7 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: us.gcr.io/ticketing-dev-445311/tickets
+    - image: us.gcr.io/sonny-ticket/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -34,7 +34,7 @@ build:
         manual:
           - src: '**/*.ts'
             dest: .
-    - image: us.gcr.io/ticketing-dev-445311/orders
+    - image: us.gcr.io/sonny-ticket/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -42,7 +42,7 @@ build:
         manual:
           - src: '**/*.ts'
             dest: .
-    - image: us.gcr.io/ticketing-dev-445311/expiration
+    - image: us.gcr.io/sonny-ticket/expiration
       context: expiration
       docker:
         dockerfile: Dockerfile
@@ -50,7 +50,7 @@ build:
         manual:
           - src: '**/*.ts'
             dest: .
-    - image: us.gcr.io/ticketing-dev-445311/payments
+    - image: us.gcr.io/sonny-ticket/payments
       context: payments
       docker:
         dockerfile: Dockerfile
