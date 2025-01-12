@@ -47,7 +47,7 @@ const start = async () => {
     console.error(error)
   }
 
-  app.listen(3000, () => console.log('Tickets service is running on 3000'))
+  app.listen(3000, () => console.log('✅✅✅✅ Tickets service is running on 3000'))
 }
 
 start()

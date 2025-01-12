@@ -4,6 +4,7 @@ import cookieSession from "cookie-session";
 import express from "express";
 import "express-async-errors";
 import morgan from 'morgan';
+import { createChargeRouter } from "./routes/new";
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(
 );
 
 app.use(getCurrentUser)
+app.use(createChargeRouter)
 
 app.all("*", async (req, res, next) => {
   throw new NotFoundError();

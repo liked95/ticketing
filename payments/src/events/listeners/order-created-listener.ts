@@ -1,9 +1,10 @@
 import {Listener, OrderCreatedEvent, Subjects} from '@sonnytickets/common'
 import { Message } from 'node-nats-streaming'
 import { Order } from '../../models/order'
+import { queueGroupName } from './queue-group-name'
 
 export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
-  queueGroupName: string = this.queueGroupName
+  queueGroupName: string = queueGroupName
   subject: Subjects.OrderCreated = Subjects.OrderCreated
 
   async onMessage(data: OrderCreatedEvent['data'], msg: Message) {
