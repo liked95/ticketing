@@ -6,7 +6,7 @@ import {Message} from 'node-nats-streaming'
 import {Ticket} from '../../../models/ticket'
 import {Order} from '../../../models/order'
 
-const setup = async () => {
+const setup = async (orderStatus?: OrderStatus) => {
   const listener = new ExpirationCompleteListener(natsWrapper.client)
 
   const ticket = Ticket.build({
@@ -19,7 +19,7 @@ const setup = async () => {
   const order = Order.build({
     ticket,
     userId: new mongoose.Types.ObjectId().toHexString(),
-    status: OrderStatus.Created,
+    status: orderStatus || OrderStatus.Created,
     expiresAt: new Date(),
   })
   await order.save()
@@ -52,6 +52,14 @@ it('emit OrderCancelerPublisher event', async () => {
 
   const eventData = JSON.parse((natsWrapper.client.publish as jest.Mock).mock.calls[0][1])
   expect(eventData.id).toEqual(order.id)
+})
+
+it('refuses to cancel order that has been paid successfully', async () => {
+  const {listener, order, data, msg} = await setup(OrderStatus.Completed)
+  await listener.onMessage(data, msg)
+  const updatedOrder = await Order.findById(order.id)
+  expect(updatedOrder?.status).toEqual(OrderStatus.Completed)
+  expect(msg.ack).toHaveBeenCalled()
 })
 
 it('ack msg', async () => {
