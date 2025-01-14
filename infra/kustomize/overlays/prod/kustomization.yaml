@@ -1,0 +1,20 @@
+bases:
+  - ../../base
+
+resources:
+  - config-map.yaml  
+  - ingress-srv.yaml
+
+images:
+  - name: IMAGE_PLACEHOLDER/auth
+    newName: liked95/auth   # Replace IMAGE_PLACEHOLDER with the actual image path
+  - name: IMAGE_PLACEHOLDER/client
+    newName: liked95/client
+  - name: IMAGE_PLACEHOLDER/expiration
+    newName: liked95/expiration
+  - name: IMAGE_PLACEHOLDER/orders
+    newName: liked95/orders
+  - name: IMAGE_PLACEHOLDER/payments
+    newName: liked95/payments
+  - name: IMAGE_PLACEHOLDER/tickets
+    newName: liked95/tickets

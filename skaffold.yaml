@@ -1,17 +1,16 @@
 apiVersion: skaffold/v2alpha3
 kind: Config
-deploy: 
-  kubectl:
-    manifests:
-      - ./infra/k8s/*
-      - ./infra/k8s-dev/*
+deploy:
+  kustomize:
+    paths:
+      - ./infra/kustomize/overlays/dev
 build:
   # local:
   #   push: false
   googleCloudBuild:
     projectId: sonny-ticket
   artifacts:
-    - image: liked95/auth
+    - image: us.gcr.io/sonny-ticket/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -19,7 +18,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: liked95/client
+    - image: us.gcr.io/sonny-ticket/client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -27,7 +26,7 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: liked95/tickets
+    - image: us.gcr.io/sonny-ticket/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -35,7 +34,7 @@ build:
         manual:
           - src: '**/*.ts'
             dest: .
-    - image: liked95/orders
+    - image: us.gcr.io/sonny-ticket/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -43,7 +42,7 @@ build:
         manual:
           - src: '**/*.ts'
             dest: .
-    - image: liked95/expiration
+    - image: us.gcr.io/sonny-ticket/expiration
       context: expiration
       docker:
         dockerfile: Dockerfile
@@ -51,7 +50,7 @@ build:
         manual:
           - src: '**/*.ts'
             dest: .
-    - image: liked95/payments
+    - image: us.gcr.io/sonny-ticket/payments
       context: payments
       docker:
         dockerfile: Dockerfile
