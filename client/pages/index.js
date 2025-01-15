@@ -1,7 +1,7 @@
 import Link from 'next/link'
+import Head from 'next/head'
 
 const LandingPage = ({ currentUser, tickets }) => {
-    console.log("🚀 ~ LandingPage ~ tickets:", tickets)
     const ticketList = tickets.map(ticket => (
         <tr key={ticket.id}>
             <td>{ticket.title}</td>
@@ -18,9 +18,12 @@ const LandingPage = ({ currentUser, tickets }) => {
         </tr>
     ))
     return (
-        <div style={{ paddingLeft: '200px', paddingRight: '200px' }}>
+        <>
+            <Head>
+                <title>TikListing</title>
+            </Head>
             <h2>Tickets</h2>
-            <table className="table">
+            <table className="table table-striped table-responsive">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -32,7 +35,7 @@ const LandingPage = ({ currentUser, tickets }) => {
                     {ticketList}
                 </tbody>
             </table>
-        </div>
+        </>
     )
 }
 

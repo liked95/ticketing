@@ -7,7 +7,7 @@ const NewTicket = () => {
     const [title, setTitle] = useState('')
     const [price, setPrice] = useState('')
 
-    const {doRequest, errors} = useRequest({
+    const { doRequest, errors } = useRequest({
         url: '/api/tickets',
         method: 'post',
         body: {
@@ -20,7 +20,7 @@ const NewTicket = () => {
         event.preventDefault()
         doRequest()
     }
-    
+
     const onBlur = (event) => {
         const value = parseFloat(price)
         console.log("🚀 ~ onBlur ~ value:", value)
@@ -32,28 +32,28 @@ const NewTicket = () => {
     }
 
     return (
-        <div className="container mt-5">
-            <h1>Create new ticket</h1>
-            <form onSubmit={onSubmit}>
+        <div className="container mt-5 mw-500" >
+            <h1 className="text-center mb-4">Create New Ticket</h1>
+            <form onSubmit={onSubmit} className="shadow p-4 rounded bg-light">
                 <div className="form-group mb-3">
-                    <label>Title</label>
-                    <input 
-                        className="form-control" 
+                    <label className="form-label">Title</label>
+                    <input
+                        className="form-control"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
                 <div className="form-group mb-3">
-                    <label>Price</label>
-                    <input 
-                        className="form-control" 
+                    <label className="form-label">Price</label>
+                    <input
+                        className="form-control"
                         value={price}
                         onBlur={onBlur}
                         onChange={(e) => setPrice(e.target.value)}
                     />
                 </div>
-                <button className="btn btn-primary">Submit</button>
-                {errors}
+                <button className="btn btn-primary w-100">Submit</button>
+                {errors && <div className="alert alert-danger mt-3">{errors}</div>}
             </form>
         </div>
     )

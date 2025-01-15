@@ -26,6 +26,8 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
+          - src: '**/*.css'
+            dest: .
     - image: us.gcr.io/sonny-ticket/tickets
       context: tickets
       docker:

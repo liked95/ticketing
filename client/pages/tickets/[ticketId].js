@@ -1,5 +1,7 @@
 import useRequest from "../hooks/use-request"
 import Router from 'next/router'
+import Head from "next/head"
+
 const TicketShow = ({ ticket }) => {
     const { doRequest, errors } = useRequest({
         url: '/api/orders',
@@ -10,7 +12,10 @@ const TicketShow = ({ ticket }) => {
         }
     })
     return (
-        <div className="container mt-5">
+        <div className="container mt-5 mw-500">
+            <Head>
+                <title>Ticket Detail: {ticket.title}</title>
+            </Head>
             <div className="row justify-content-center">
                 <div className="col-md-8">
                     <div className="card">

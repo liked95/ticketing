@@ -1,0 +1,5 @@
+@media (min-width: 800px) {
+    .mw-500 {
+        max-width: 500px;
+    }
+}
