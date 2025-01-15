@@ -5,6 +5,7 @@ resources:
   - config-map.yaml  
   - ingress-srv.yaml
 
+
 images:
   - name: IMAGE_PLACEHOLDER/auth
     newName: liked95/auth   # Replace IMAGE_PLACEHOLDER with the actual image path
