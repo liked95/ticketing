@@ -19,29 +19,33 @@ export default () => {
         doRequest()
     }
     return (
-        <form onSubmit={onSubmit}>
-            <h1>Signup</h1>
-            <div className="form-group">
+        <form onSubmit={onSubmit} className="container mt-5" style={{ maxWidth: '500px' }}>
+            <h1 className="text-center mb-4">Sign Up</h1>
+            <div className="form-group mt-4">
                 <label>Email address</label>
                 <input
+                    type="email"
                     className="form-control"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                    placeholder="Enter your email"
                 />
             </div>
 
-            <div className="form-group">
+            <div className="form-group mt-4">
                 <label>Password</label>
                 <input
+                    type="password"
                     className="form-control"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
+                    placeholder="Enter your password"
                 />
             </div>
 
-            {errors}
+            {errors && <div className="alert alert-danger mt-3">{errors}</div>}
 
-            <button className="btn btn-primary">Sign Up</button>
+            <button className="btn btn-primary btn-block mt-4">Sign Up</button>
         </form>
     )
 }
