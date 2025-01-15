@@ -4,8 +4,13 @@ metadata:
   name: ingress-service
   annotations:
     nginx.ingress.kubernetes.io/use-regex: 'true'
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec: 
   ingressClassName: nginx
+  tls:
+    - hosts:
+      - sonvh.shop
+      secretName: sonvh-shop-tls
   rules:
     - host: sonvh.shop
       http: 

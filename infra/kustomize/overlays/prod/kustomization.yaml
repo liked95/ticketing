@@ -3,6 +3,7 @@ bases:
 
 resources:
   - config-map.yaml  
+  - prod-issuer.yaml
   - ingress-srv.yaml
 
 images:
