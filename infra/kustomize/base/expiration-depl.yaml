@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: expiration
-          image: liked95/expiration
+          image: IMAGE_PLACEHOLDER/expiration
           env: 
             - name: NATS_CLIENT_ID
               valueFrom:

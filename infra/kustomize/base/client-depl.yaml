@@ -14,7 +14,13 @@ spec:
     spec: 
       containers:
         - name: client  
-          image: liked95/client
+          image: IMAGE_PLACEHOLDER/client
+          env: 
+            - name: CLIENT_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: client-config  # Reference the ConfigMap
+                  key: BASE_URL  # Use the key from the ConfigMap
 ---
 apiVersion: v1
 kind: Service

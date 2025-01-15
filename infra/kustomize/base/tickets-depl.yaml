@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tickets
-          image: liked95/tickets
+          image: IMAGE_PLACEHOLDER/tickets
           env: 
             - name: NATS_CLIENT_ID
               valueFrom:

@@ -1,0 +1,20 @@
+bases:
+  - ../../base
+
+resources:
+  - config-map.yaml  
+  - ingress-srv.yaml
+
+images:
+  - name: IMAGE_PLACEHOLDER/auth
+    newName: us.gcr.io/sonny-ticket/auth
+  - name: IMAGE_PLACEHOLDER/client
+    newName: us.gcr.io/sonny-ticket/client
+  - name: IMAGE_PLACEHOLDER/expiration
+    newName: us.gcr.io/sonny-ticket/expiration
+  - name: IMAGE_PLACEHOLDER/orders
+    newName: us.gcr.io/sonny-ticket/orders
+  - name: IMAGE_PLACEHOLDER/payments
+    newName: us.gcr.io/sonny-ticket/payments
+  - name: IMAGE_PLACEHOLDER/tickets
+    newName: us.gcr.io/sonny-ticket/tickets

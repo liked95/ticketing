@@ -1,0 +1,13 @@
+resources:
+  - auth-depl.yaml
+  - auth-mongo-depl.yaml
+  - client-depl.yaml
+  - expiration-depl.yaml
+  - expiration-redis-depl.yaml
+  - nats-depl.yaml
+  - orders-depl.yaml
+  - orders-mongo-depl.yaml
+  - payments-depl.yaml
+  - payments-mongo-depl.yaml
+  - tickets-depl.yaml
+  - tickets-mongo-depl.yaml
