@@ -34,7 +34,7 @@ const OrderShow = ({ order, currentUser }) => {
     }
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-5 mw-500">
             <div className="d-flex flex-column align-items-center">
                 <div>Time left to pay: {timeLeft} seconds</div>
                 <StripeCheckOut

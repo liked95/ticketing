@@ -12,7 +12,7 @@ const TicketShow = ({ ticket }) => {
         }
     })
     return (
-        <div className="container mt-5">
+        <div className="container mt-5 mw-500">
             <Head>
                 <title>Ticket Detail: {ticket.title}</title>
             </Head>
