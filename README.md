@@ -1,7 +1,7 @@
 TODO:
 - ✅ Separate dev and prod environment with kustomize 
-- ❌ Add HTTPS
+- ✅ Add HTTPS
+- ❌ Build Nodejs and Nextjs for production
 - ❌ Build ticket update function
 - ❌ Add Email support
-- ❌ Build Nodejs and Nextjs for production
 - ❌ Create staging cluster
