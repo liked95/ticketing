@@ -56,6 +56,7 @@ kind: Service
 metadata:
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+    service.beta.kubernetes.io/do-loadbalancer-tls-passthrough: "true"
     service.beta.kubernetes.io/do-loadbalancer-hostname: "sonvh.shop"
   labels:
     helm.sh/chart: ingress-nginx-2.0.3
