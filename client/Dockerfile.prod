@@ -1,0 +1,39 @@
+# Base image
+FROM node:alpine AS builder
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only package.json to install dependencies
+COPY package.json ./
+
+# Install dependencies
+RUN yarn install
+
+# Copy the entire project
+COPY . .
+
+# Build the application
+RUN yarn build
+
+# Stage 2: Production image
+FROM node:alpine AS runner
+
+# Set the working directory
+WORKDIR /app
+
+# Install only production dependencies
+COPY package.json ./
+RUN yarn install --production
+
+# Copy the built Next.js application
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/package.json ./
+
+# Expose the port
+EXPOSE 3000
+
+# Start the application
+CMD ["yarn", "start"]
