@@ -5,7 +5,7 @@ import { OrderCreatedListener } from './events/listeners/order-created-listener'
 import { OrderCancelledListener } from './events/listeners/order-cancelled-listener'
 
 const start = async () => {
-  console.log('Payments service starting v1...')
+  console.log('Payments service starting v2...')
 
   try {
     if (!process.env.JWT_KEY) {
