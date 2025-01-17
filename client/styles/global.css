@@ -3,3 +3,45 @@
         max-width: 500px;
     }
 }
+
+/* Flash effect moving from left to right */
+@keyframes flash-move {
+    0% {
+        box-shadow: -10px 0 30px rgba(255, 255, 255, 0.2), -10px 0 60px rgba(255, 255, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.6), 10px 0 90px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        box-shadow: 10px 0 30px rgba(255, 255, 255, 0.2), 10px 0 60px rgba(255, 255, 255, 0.4);
+    }
+}
+
+.btn-outline-success {
+    transition: 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.btn-outline-success:hover {
+    color: white;
+    background-color: #28a745;
+    border-color: #28a745;
+    animation: flash-move 1s infinite;
+}
+
+.btn-gradient-primary {
+    transition: 0.3s ease-in-out;
+    background: linear-gradient(to right, #007bff, #6610f2);
+    color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.btn-gradient-primary:hover {
+    animation: flash-move 1s infinite;
+    background: linear-gradient(to right, #0056b3, #520dc2);
+}

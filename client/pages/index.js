@@ -4,7 +4,12 @@ import Head from 'next/head'
 const LandingPage = ({ currentUser, tickets }) => {
     const ticketList = tickets.map(ticket => (
         <tr key={ticket.id}>
-            <td>{ticket.title}</td>
+            <td>
+                {ticket.title}{' '}
+                {currentUser && currentUser.id === ticket.userId && (
+                    <i className="fas fa-user-circle" style={{ color: 'blue', marginLeft: '8px' }} title="Your Ticket"></i>
+                )}
+            </td>
             <td>{ticket.price}</td>
             <td>
                 {ticket.orderId ? (
@@ -17,10 +22,16 @@ const LandingPage = ({ currentUser, tickets }) => {
             </td>
         </tr>
     ))
+
     return (
         <>
             <Head>
                 <title>TikListing</title>
+                {/* Include Font Awesome */}
+                <link
+                    rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+                />
             </Head>
             <h2>Tickets</h2>
             <table className="table table-striped table-responsive">
