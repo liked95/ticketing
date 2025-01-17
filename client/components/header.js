@@ -20,10 +20,16 @@ export default ({ currentUser }) => {
 
     return (
         <nav className="navbar navbar-light bg-light p-3">
-            <Link href="/" className="navbar-brand">
-                SonnyVegas
-            </Link>
-
+            <div className="d-flex align-items-center">
+                <Link href="/" className="navbar-brand">
+                    SonnyVegas
+                </Link>
+                {currentUser && (
+                    <span className="navbar-text ms-3">
+                        Hello, {currentUser.email}
+                    </span>
+                )}
+            </div>
             <div className="d-flex justify-content-end">
                 <ul className="nav d-flex align-items-center">
                     {links}
