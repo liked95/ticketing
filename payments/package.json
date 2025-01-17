@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --poll src/index.ts",
+    "dev": "ts-node-dev --poll src/index.ts",
+    "start": "node dist/index.js",
     "test": "jest --watchAll --no-cache",
-    "test:ci": "jest"
+    "test:ci": "jest",
+    "build": "tsc"
   },
   "jest": {
     "preset": "ts-jest",
