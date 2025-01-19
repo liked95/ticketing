@@ -18,3 +18,5 @@ images:
     newName: us.gcr.io/sonny-ticket/payments
   - name: IMAGE_PLACEHOLDER/tickets
     newName: us.gcr.io/sonny-ticket/tickets
+  - name: IMAGE_PLACEHOLDER/reviews
+    newName: us.gcr.io/sonny-ticket/reviews

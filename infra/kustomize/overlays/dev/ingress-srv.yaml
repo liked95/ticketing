@@ -10,6 +10,13 @@ spec:
     - host: ticketing.dev  # Dev-specific host
       http: 
         paths:
+          - path: /api/reviews/?(.*)
+            pathType: ImplementationSpecific
+            backend: 
+              service:
+                name: reviews-srv
+                port:
+                  number: 3000
           - path: /api/payments/?(.*)
             pathType: ImplementationSpecific
             backend: 
