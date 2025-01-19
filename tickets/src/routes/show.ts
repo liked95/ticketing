@@ -11,6 +11,9 @@ router.get("/api/tickets/:id", async (req: Request, res: Response) => {
     throw new NotFoundError();
   }
 
+  ticket.viewCount = ticket.viewCount ? ticket.viewCount + 1 : 1;
+  await ticket.save();
+
   res.send(ticket);
 });
 

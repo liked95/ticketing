@@ -1,6 +1,7 @@
 import useRequest from "../hooks/use-request"
 import Router from 'next/router'
 import Head from "next/head"
+import Rating from "../../components/rating"
 
 const TicketShow = ({ ticket, currentUser }) => {
     console.log("🚀 ~ TicketShow ~ currentUser:", { ticket, currentUser })
@@ -20,6 +21,11 @@ const TicketShow = ({ ticket, currentUser }) => {
     const handleEdit = (e) => {
         Router.push('/tickets/edit/[ticketId]', `/tickets/edit/${ticket.id}`)
     }
+
+    const handleRating = (rating) => {
+        console.log(`User rated ${ticket.id} with ${rating} stars`);
+        // Optionally, send the rating to the backend
+    };
     return (
         <div className="container mt-5">
             <Head>
@@ -50,7 +56,14 @@ const TicketShow = ({ ticket, currentUser }) => {
                                 <h5 className="text-muted">
                                     Seller: <span className="text-primary">{ticket.userId}</span>
                                 </h5>
+                                <h5 className="text-muted mt-3">
+                                    Views:{" "}
+                                    <span className="text-info font-weight-bold">
+                                        {ticket.viewCount || 0}
+                                    </span>
+                                </h5>
                             </div>
+                            <Rating onRate={handleRating} initialRating={0} />
                             {errors && (
                                 <div className="alert alert-danger text-center">
                                     {errors}
