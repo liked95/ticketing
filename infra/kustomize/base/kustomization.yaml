@@ -11,3 +11,5 @@ resources:
   - payments-mongo-depl.yaml
   - tickets-depl.yaml
   - tickets-mongo-depl.yaml
+  - reviews-depl.yaml
+  - reviews-mongo-depl.yaml
