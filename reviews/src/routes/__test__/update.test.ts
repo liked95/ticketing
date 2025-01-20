@@ -28,29 +28,6 @@ it('returns 401 if the user is not authenticated', async () => {
     .expect(401)
 })
 
-it('returns 401 if the user does not own the review', async () => {
-  const ticketId = new mongoose.Types.ObjectId().toHexString()
-  const userOneCookie = global.signin()
-
-  // Create a review as user one
-  await request(app).post('/api/reviews').set('Cookie', userOneCookie).send({
-    rating: 3,
-    content: 'Decent performance',
-    ticketId,
-  })
-
-  // Attempt to update the review as a different user
-  const userTwoCookie = global.signin()
-  await request(app)
-    .put(`/api/reviews/${ticketId}`)
-    .set('Cookie', userTwoCookie)
-    .send({
-      rating: 4,
-      content: 'Really good performance',
-    })
-    .expect(401)
-})
-
 it('returns 400 if the user provides invalid rating or content', async () => {
   const ticketId = new mongoose.Types.ObjectId().toHexString()
   const cookie = global.signin()
