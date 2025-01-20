@@ -13,18 +13,16 @@ router.put(
   [body('rating').isInt({gt: 0, lt: 6}).withMessage('rating must be between 1 and 5')],
   validateRequest,
   async (req: Request, res: Response) => {
-    const review = await Review.findOne({ticketId: req.params.ticketId})
+    const review = await Review.findOne({
+      ticketId: req.params.ticketId,
+      reviewerId: req.currentUser!.id,
+    })
 
     if (!review) {
       throw new NotFoundError()
     }
 
     console.log({review, userId: req.currentUser!.id})
-
-    if (review.reviewerId !== req.currentUser!.id) {
-      throw new NotAuthorizedError()
-    }
-
     const oldRating = review.rating
 
     review.set({
