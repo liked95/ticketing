@@ -83,7 +83,13 @@ const TicketShow = ({ ticket, currentUser }) => {
                                         {ticket.viewCount || 0}
                                     </span>
                                 </h5>
+
+                                <span className="text-info font-weight-bold">
+                                    Ratings:{" "}
+                                    ({ticket.rating.average.toFixed(2) || "0.00"} /  {ticket.rating.count || 0})
+                                </span>
                             </div>
+
                             <div className="text-center mt-4">
                                 <button
                                     className="btn btn-outline-info rounded-pill shadow-sm px-4"

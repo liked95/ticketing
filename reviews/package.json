@@ -37,7 +37,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@sonnytickets/common": "^1.0.25",
+    "@sonnytickets/common": "^1.0.26",
     "cookie-session": "^2.1.0",
     "express": "^4.21.2",
     "express-async-errors": "^3.1.1",
