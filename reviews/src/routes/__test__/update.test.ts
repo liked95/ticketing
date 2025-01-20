@@ -7,7 +7,7 @@ it('returns 404 if the review for the given ticketId does not exist', async () =
   const ticketId = new mongoose.Types.ObjectId().toHexString()
 
   await request(app)
-    .put(`/api/review/${ticketId}`)
+    .put(`/api/reviews/${ticketId}`)
     .set('Cookie', global.signin())
     .send({
       rating: 3,
@@ -20,7 +20,7 @@ it('returns 401 if the user is not authenticated', async () => {
   const ticketId = new mongoose.Types.ObjectId().toHexString()
 
   await request(app)
-    .put(`/api/review/${ticketId}`)
+    .put(`/api/reviews/${ticketId}`)
     .send({
       rating: 3,
       content: 'Great performance!',
@@ -42,7 +42,7 @@ it('returns 401 if the user does not own the review', async () => {
   // Attempt to update the review as a different user
   const userTwoCookie = global.signin()
   await request(app)
-    .put(`/api/review/${ticketId}`)
+    .put(`/api/reviews/${ticketId}`)
     .set('Cookie', userTwoCookie)
     .send({
       rating: 4,
@@ -64,7 +64,7 @@ it('returns 400 if the user provides invalid rating or content', async () => {
 
   // Attempt to update with invalid data
   await request(app)
-    .put(`/api/review/${ticketId}`)
+    .put(`/api/reviews/${ticketId}`)
     .set('Cookie', cookie)
     .send({
       rating: 0, // Invalid rating
@@ -73,7 +73,7 @@ it('returns 400 if the user provides invalid rating or content', async () => {
     .expect(400)
 
   await request(app)
-    .put(`/api/review/${ticketId}`)
+    .put(`/api/reviews/${ticketId}`)
     .set('Cookie', cookie)
     .send({
       rating: 6, // Invalid rating
@@ -98,7 +98,7 @@ it('returns 200 if the review is successfully updated', async () => {
   const updatedRating = 5
 
   await request(app)
-    .put(`/api/review/${ticketId}`)
+    .put(`/api/reviews/${ticketId}`)
     .set('Cookie', cookie)
     .send({
       rating: updatedRating,
@@ -108,7 +108,7 @@ it('returns 200 if the review is successfully updated', async () => {
 
   // Verify the updated review
   const reviewResponse = await request(app)
-    .get(`/api/review/${ticketId}`)
+    .get(`/api/reviews/${ticketId}`)
     .set('Cookie', cookie)
     .send()
   expect(reviewResponse.body.rating).toEqual(updatedRating)
@@ -128,7 +128,7 @@ it('publishes an event after a successful update', async () => {
 
   // Update the review
   await request(app)
-    .put(`/api/review/${ticketId}`)
+    .put(`/api/reviews/${ticketId}`)
     .set('Cookie', cookie)
     .send({
       rating: 5,

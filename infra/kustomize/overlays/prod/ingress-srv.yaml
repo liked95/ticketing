@@ -22,7 +22,7 @@ spec:
                 name: payments-srv
                 port:
                   number: 3000
-          - path: /api/review(s)?(/.*)?
+          - path: /api/reviews/?(.*)
             pathType: ImplementationSpecific
             backend: 
               service:

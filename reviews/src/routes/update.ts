@@ -8,7 +8,7 @@ import {Review} from '../models/review'
 const router = express.Router()
 
 router.put(
-  '/api/review/:ticketId',
+  '/api/reviews/:ticketId',
   requireAuth,
   [body('rating').isInt({gt: 0, lt: 6}).withMessage('rating must be between 1 and 5')],
   validateRequest,

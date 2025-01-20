@@ -18,7 +18,7 @@ const TicketShow = ({ ticket, currentUser }) => {
     })
 
     const { doRequest: doRequestReview, loading: loadingReview } = useRequest({
-        url: `/api/review/${ticket.id}`,
+        url: `/api/reviews/${ticket.id}`,
         method: 'get',
         onSuccess: (review) => {
             setReview(review)

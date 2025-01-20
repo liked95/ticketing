@@ -10,7 +10,7 @@ spec:
     - host: ticketing.dev  # Dev-specific host
       http: 
         paths:
-          - path: /api/review(s)?(/.*)?
+          - path: /api/reviews/?(.*)
             pathType: ImplementationSpecific
             backend: 
               service:

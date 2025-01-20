@@ -4,12 +4,12 @@ import mongoose from 'mongoose'
 
 it('return 401 if the is not', async () => {
   const id = new mongoose.Types.ObjectId().toHexString()
-  await request(app).get(`/api/review/${id}`).send().expect(401)
+  await request(app).get(`/api/reviews/${id}`).send().expect(401)
 })
 
 it('return 404 if the review is not found', async () => {
   const id = new mongoose.Types.ObjectId().toHexString()
-  await request(app).get(`/api/review/${id}`).set('Cookie', global.signin()).send().expect(404)
+  await request(app).get(`/api/reviews/${id}`).set('Cookie', global.signin()).send().expect(404)
 })
 
 it('return the review if the review is found', async () => {
@@ -25,7 +25,7 @@ it('return the review if the review is found', async () => {
     .expect(201)
 
   const ticketResponse = await request(app)
-    .get(`/api/review/${response.body.ticketId}`)
+    .get(`/api/reviews/${response.body.ticketId}`)
     .set('Cookie', user)
     .send()
     .expect(200)

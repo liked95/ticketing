@@ -36,7 +36,7 @@ const ReviewsTable = ({ reviews, ticket }) => {
 
 ReviewsTable.getInitialProps = async (context, client) => {
     const { ticketId } = context.query
-    const { data: reviews } = await client.get(`/api/reviews/${ticketId}`)
+    const { data: reviews } = await client.get(`/api/reviews/all/${ticketId}`)
     const { data: ticket } = await client.get(`/api/tickets/${ticketId}`)
     return { reviews, ticket }
 

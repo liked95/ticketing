@@ -12,7 +12,7 @@ it('fetches all reviews for a specific ticket', async () => {
     {ticketId, rating: 4, content: 'Good!', reviewerId: 'user2'},
   ])
 
-  const response = await request(app).get(`/api/reviews/${ticketId}`).send().expect(200)
+  const response = await request(app).get(`/api/reviews/all/${ticketId}`).send().expect(200)
 
   expect(response.body.length).toEqual(2)
 })
