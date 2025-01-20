@@ -45,3 +45,14 @@
     animation: flash-move 1s infinite;
     background: linear-gradient(to right, #0056b3, #520dc2);
 }
+
+/* Filled star with yellow color */
+.star-filled {
+    color: #ffc107; /* Yellow color for filled stars */
+}
+
+/* Empty star with gray color */
+.star-empty {
+    color: #d3d3d3; /* Gray color for unfilled stars */
+}
+

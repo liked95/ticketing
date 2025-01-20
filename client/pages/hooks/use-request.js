@@ -2,12 +2,14 @@ import axios from 'axios'
 import { useState } from 'react'
 
 
-export default ({ url, method, body, onSuccess }) => {
+export default ({ url, method, body, onSuccess, onError }) => {
     const [errors, setErrors] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     async function doRequest(props = {}) {
         try {
             setErrors(null)
+            setLoading(true)
             const response = await axios[method](url, { ...body, ...props })
             onSuccess && onSuccess(response.data)
             return response.data
@@ -22,8 +24,11 @@ export default ({ url, method, body, onSuccess }) => {
                     </ul>
                 </div>
             )
+            onError && onError(error)
+        } finally {
+            setLoading(false)
         }
     }
 
-    return { errors, doRequest }
+    return { errors, doRequest, loading }
 }

@@ -11,7 +11,8 @@
     "update-lib-orders": "cd orders && yarn add @sonnytickets/common",
     "update-lib-expiration": "cd expiration && yarn add @sonnytickets/common",
     "update-lib-payments": "cd payments && yarn add @sonnytickets/common",
-    "update-lib": "npm run update-lib-auth && npm run update-lib-tickets && npm run update-lib-orders && npm run update-lib-payments && npm run update-lib-expiration"
+    "update-lib-reviews": "cd reviews && yarn add @sonnytickets/common",
+    "update-lib": "npm run update-lib-auth && npm run update-lib-tickets && npm run update-lib-orders && npm run update-lib-payments && npm run update-lib-expiration && npm run update-lib-reviews"
   },
   "keywords": [],
   "author": "",

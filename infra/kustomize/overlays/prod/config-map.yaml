@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: client-config
 data:
-  BASE_URL: "http://sonvh.shop"
+  BASE_URL: "https://sonvh.shop"

@@ -1,0 +1,13 @@
+name: tests-reviews
+
+on: 
+  pull_request:
+    paths: 
+      - 'reviews/**'
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd reviews && npm install && npm run test:ci

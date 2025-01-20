@@ -20,3 +20,5 @@ images:
     newName: liked95/payments
   - name: IMAGE_PLACEHOLDER/tickets
     newName: liked95/tickets
+  - name: IMAGE_PLACEHOLDER/reviews
+    newName: liked95/reviews

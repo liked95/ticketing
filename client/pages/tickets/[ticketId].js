@@ -1,9 +1,13 @@
+import { useState } from "react"
 import useRequest from "../hooks/use-request"
-import Router from 'next/router'
+import Router, { useRouter } from "next/router"
 import Head from "next/head"
+import RatingModal from "../../components/ratingModal"
 
 const TicketShow = ({ ticket, currentUser }) => {
-    console.log("🚀 ~ TicketShow ~ currentUser:", { ticket, currentUser })
+    const router = useRouter()
+    const [showModal, setShowModal] = useState(false)
+    const [review, setReview] = useState(null)
     const { doRequest, errors } = useRequest({
         url: '/api/orders',
         method: 'post',
@@ -13,13 +17,41 @@ const TicketShow = ({ ticket, currentUser }) => {
         }
     })
 
-    const handlePurchase = (e) => {
+    const { doRequest: doRequestReview, loading: loadingReview } = useRequest({
+        url: `/api/reviews/${ticket.id}`,
+        method: 'get',
+        onSuccess: (review) => {
+            setReview(review)
+            setShowModal(true)
+        },
+        onError: (error) => {
+            if (error?.status === 404) {
+                setReview(null)
+                setShowModal(true)
+            }
+        }
+    })
+
+    const handlePurchase = () => {
         doRequest()
     }
 
-    const handleEdit = (e) => {
+    const handleEdit = () => {
         Router.push('/tickets/edit/[ticketId]', `/tickets/edit/${ticket.id}`)
     }
+
+    const handleOpenRatingModal = async () => {
+        doRequestReview()
+    }
+
+    const handleCloseRatingModal = () => {
+        setShowModal(false)
+    }
+
+    const handleShowAllReviews = () => {
+        router.push(`/tickets/${ticket.id}/reviews`)
+    }
+
     return (
         <div className="container mt-5">
             <Head>
@@ -50,7 +82,37 @@ const TicketShow = ({ ticket, currentUser }) => {
                                 <h5 className="text-muted">
                                     Seller: <span className="text-primary">{ticket.userId}</span>
                                 </h5>
+                                <h5 className="text-muted mt-3">
+                                    Views:{" "}
+                                    <span className="text-info font-weight-bold">
+                                        {ticket.viewCount || 0}
+                                    </span>
+                                </h5>
+
+                                <span className="text-info font-weight-bold" onClick={handleShowAllReviews}>
+                                    Ratings:{" "}
+                                    ({ticket.rating.average.toFixed(2) || "0.00"} /  {ticket.rating.count || 0})
+                                </span>
                             </div>
+
+                            <div className="text-center mt-4">
+                                <button
+                                    className="btn btn-outline-info rounded-pill shadow-sm px-4"
+                                    onClick={handleOpenRatingModal}
+                                >
+                                    {loadingReview ? "Loading..." : "Click to Rate"}
+                                </button>
+                            </div>
+
+
+                            {showModal && (
+                                <RatingModal
+                                    ticketId={ticket.id}
+                                    review={review}
+                                    onClose={handleCloseRatingModal}
+                                />
+                            )}
+
                             {errors && (
                                 <div className="alert alert-danger text-center">
                                     {errors}
@@ -81,7 +143,7 @@ const TicketShow = ({ ticket, currentUser }) => {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 TicketShow.getInitialProps = async (context, client) => {
@@ -90,4 +152,4 @@ TicketShow.getInitialProps = async (context, client) => {
     return { ticket }
 }
 
-export default TicketShow;
+export default TicketShow
