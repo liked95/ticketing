@@ -30,7 +30,6 @@ router.post(
       reviewerId: review.reviewerId,
       rating: review.rating,
       content: review.content,
-      version: review.version
     })
 
     res.status(201).send(review);

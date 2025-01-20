@@ -4,6 +4,7 @@ import {natsWrapper} from './nats-wrapper'
 import { OrderCreatedListener } from './events/listeners/order-created-listener'
 import { OrderCancelledListener } from './events/listeners/order-cancelled-listener'
 import { ReviewCreatedPublisher } from './events/listeners/review-created-listenter'
+import { ReviewUpdatedListener } from './events/listeners/review-updated-listener'
 
 const start = async () => {
   console.log('Tickets service starting v1...')
@@ -46,7 +47,8 @@ const start = async () => {
     new OrderCreatedListener(natsWrapper.client).listen()
     new OrderCancelledListener(natsWrapper.client).listen()
     new ReviewCreatedPublisher(natsWrapper.client).listen()
-    
+    new ReviewUpdatedListener(natsWrapper.client).listen()
+
     console.log('Connected to MongoDB')
   } catch (error) {
     console.error(error)

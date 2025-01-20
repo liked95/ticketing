@@ -8,7 +8,7 @@ const RatingModal = ({ ticketId, review, onClose }) => {
     const [content, setContent] = useState(review?.content || "")
     const [isEditing, setIsEditing] = useState(!review)
     const { doRequest, errors, loading } = useRequest({
-        url: review ? `/api/reviews/${ticketId}` : '/api/reviews',
+        url: review ? `/api/review/${ticketId}` : '/api/reviews',
         method: review ? 'put' : 'post',
         body: { ticketId, rating, content },
         onSuccess: () => {

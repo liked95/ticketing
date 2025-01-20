@@ -8,7 +8,7 @@ import {Review} from '../models/review'
 const router = express.Router()
 
 router.put(
-  '/api/reviews/:ticketId',
+  '/api/review/:ticketId',
   requireAuth,
   [body('rating').isInt({gt: 0, lt: 6}).withMessage('rating must be between 1 and 5')],
   validateRequest,
@@ -19,9 +19,13 @@ router.put(
       throw new NotFoundError()
     }
 
+    console.log({review, userId: req.currentUser!.id})
+
     if (review.reviewerId !== req.currentUser!.id) {
       throw new NotAuthorizedError()
     }
+
+    const oldRating = review.rating
 
     review.set({
       rating: req.body.rating,
@@ -35,8 +39,8 @@ router.put(
       ticketId: review.ticketId,
       reviewerId: review.reviewerId,
       rating: review.rating,
+      ratingDifferenceOnUpdate: review.rating - oldRating,
       content: review.content,
-      version: review.version,
     })
 
     res.send(review)

@@ -1,10 +1,11 @@
 import { useState } from "react"
 import useRequest from "../hooks/use-request"
-import Router from "next/router"
+import Router, { useRouter } from "next/router"
 import Head from "next/head"
 import RatingModal from "../../components/ratingModal"
 
 const TicketShow = ({ ticket, currentUser }) => {
+    const router = useRouter()
     const [showModal, setShowModal] = useState(false)
     const [review, setReview] = useState(null)
     const { doRequest, errors } = useRequest({
@@ -17,7 +18,7 @@ const TicketShow = ({ ticket, currentUser }) => {
     })
 
     const { doRequest: doRequestReview, loading: loadingReview } = useRequest({
-        url: `/api/reviews/${ticket.id}`,
+        url: `/api/review/${ticket.id}`,
         method: 'get',
         onSuccess: (review) => {
             setReview(review)
@@ -45,6 +46,10 @@ const TicketShow = ({ ticket, currentUser }) => {
 
     const handleCloseRatingModal = () => {
         setShowModal(false)
+    }
+
+    const handleShowAllReviews = () => {
+        router.push(`/tickets/${ticket.id}/reviews`)
     }
 
     return (
@@ -84,7 +89,7 @@ const TicketShow = ({ ticket, currentUser }) => {
                                     </span>
                                 </h5>
 
-                                <span className="text-info font-weight-bold">
+                                <span className="text-info font-weight-bold" onClick={handleShowAllReviews}>
                                     Ratings:{" "}
                                     ({ticket.rating.average.toFixed(2) || "0.00"} /  {ticket.rating.count || 0})
                                 </span>

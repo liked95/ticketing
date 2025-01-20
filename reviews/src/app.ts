@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import { createReviewRouter } from "./routes/new";
 import { showReviewRouter } from "./routes/show";
 import { updateReviewRouter } from "./routes/update";
+import { showAllReviewsRouter } from "./routes";
 
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(getCurrentUser)
 
 app.use(createReviewRouter)
 app.use(showReviewRouter)
+app.use(showAllReviewsRouter)
 app.use(updateReviewRouter)
 
 app.all("*", async (req, res, next) => {
