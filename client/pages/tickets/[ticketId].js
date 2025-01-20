@@ -1,10 +1,12 @@
+import { useState } from "react"
 import useRequest from "../hooks/use-request"
-import Router from 'next/router'
+import Router from "next/router"
 import Head from "next/head"
-import Rating from "../../components/rating"
+import RatingModal from "../../components/ratingModal"
 
 const TicketShow = ({ ticket, currentUser }) => {
-    console.log("🚀 ~ TicketShow ~ currentUser:", { ticket, currentUser })
+    const [showModal, setShowModal] = useState(false)
+    const [review, setReview] = useState(null)
     const { doRequest, errors } = useRequest({
         url: '/api/orders',
         method: 'post',
@@ -14,18 +16,37 @@ const TicketShow = ({ ticket, currentUser }) => {
         }
     })
 
-    const handlePurchase = (e) => {
+    const { doRequest: doRequestReview, loading: loadingReview } = useRequest({
+        url: `/api/reviews/${ticket.id}`,
+        method: 'get',
+        onSuccess: (review) => {
+            setReview(review)
+            setShowModal(true)
+        },
+        onError: (error) => {
+            if (error?.status === 404) {
+                setReview(null)
+                setShowModal(true)
+            }
+        }
+    })
+
+    const handlePurchase = () => {
         doRequest()
     }
 
-    const handleEdit = (e) => {
+    const handleEdit = () => {
         Router.push('/tickets/edit/[ticketId]', `/tickets/edit/${ticket.id}`)
     }
 
-    const handleRating = (rating) => {
-        console.log(`User rated ${ticket.id} with ${rating} stars`);
-        // Optionally, send the rating to the backend
-    };
+    const handleOpenRatingModal = async () => {
+        doRequestReview()
+    }
+
+    const handleCloseRatingModal = () => {
+        setShowModal(false)
+    }
+
     return (
         <div className="container mt-5">
             <Head>
@@ -63,7 +84,24 @@ const TicketShow = ({ ticket, currentUser }) => {
                                     </span>
                                 </h5>
                             </div>
-                            <Rating onRate={handleRating} initialRating={0} />
+                            <div className="text-center mt-4">
+                                <button
+                                    className="btn btn-outline-info rounded-pill shadow-sm px-4"
+                                    onClick={handleOpenRatingModal}
+                                >
+                                    {loadingReview ? "Loading..." : "Click to Rate"}
+                                </button>
+                            </div>
+
+
+                            {showModal && (
+                                <RatingModal
+                                    ticketId={ticket.id}
+                                    review={review}
+                                    onClose={handleCloseRatingModal}
+                                />
+                            )}
+
                             {errors && (
                                 <div className="alert alert-danger text-center">
                                     {errors}
@@ -94,7 +132,7 @@ const TicketShow = ({ ticket, currentUser }) => {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 TicketShow.getInitialProps = async (context, client) => {
@@ -103,4 +141,4 @@ TicketShow.getInitialProps = async (context, client) => {
     return { ticket }
 }
 
-export default TicketShow;
+export default TicketShow

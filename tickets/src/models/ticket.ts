@@ -6,6 +6,10 @@ interface TicketAttrs {
   price: number
   userId: string
   viewCount?: number
+  rating?: {
+    count: number
+    average: number
+  }
 }
 
 interface TicketDoc extends mongoose.Document {
@@ -15,6 +19,10 @@ interface TicketDoc extends mongoose.Document {
   version: number
   orderId?: string
   viewCount?: number
+  rating?: {
+    count: number
+    average: number
+  }
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
@@ -41,6 +49,16 @@ const ticketSchema = new mongoose.Schema(
     viewCount: {
       type: Number,
       default: 0,
+    },
+    rating: {
+      count: {
+        type: Number,
+        default: 0,
+      },
+      average: {
+        type: Number,
+        default: 0,
+      },
     },
   },
   {

@@ -8,13 +8,12 @@ import {Review} from '../models/review'
 const router = express.Router()
 
 router.put(
-  '/api/reviews/:id',
+  '/api/reviews/:ticketId',
   requireAuth,
-  [body('ticketId').not().isEmpty().isMongoId().withMessage('ticketId is invalid')],
   [body('rating').isInt({gt: 0, lt: 6}).withMessage('rating must be between 1 and 5')],
   validateRequest,
   async (req: Request, res: Response) => {
-    const review = await Review.findOne({_id: req.params.id, ticketId: req.body.ticketId})
+    const review = await Review.findOne({ticketId: req.params.ticketId})
 
     if (!review) {
       throw new NotFoundError()
