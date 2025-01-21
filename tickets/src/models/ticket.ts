@@ -1,3 +1,4 @@
+import {TicketStatus} from '@sonnytickets/common'
 import mongoose from 'mongoose'
 import {updateIfCurrentPlugin} from 'mongoose-update-if-current'
 
@@ -6,6 +7,7 @@ interface TicketAttrs {
   price: number
   userId: string
   viewCount?: number
+  status?: TicketStatus
   rating?: {
     count: number
     average: number
@@ -19,10 +21,13 @@ interface TicketDoc extends mongoose.Document {
   version: number
   orderId?: string
   viewCount?: number
+  status?: TicketStatus
   rating?: {
     count: number
     average: number
   }
+  createdAt: Date
+  updatedAt: Date
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
@@ -43,6 +48,12 @@ const ticketSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      required: true,
+      enum: Object.values(TicketStatus),
+      default: TicketStatus.Listed,
+    },
     orderId: {
       type: String,
     },
@@ -62,6 +73,7 @@ const ticketSchema = new mongoose.Schema(
     },
   },
   {
+    timestamps: true,
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id
