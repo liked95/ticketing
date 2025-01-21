@@ -1,6 +1,12 @@
 import express, {Request, Response} from 'express'
 import {Ticket} from '../models/ticket'
-import {BadRequestError, NotAuthorizedError, NotFoundError, requireAuth, validateRequest} from '@sonnytickets/common'
+import {
+  BadRequestError,
+  NotAuthorizedError,
+  NotFoundError,
+  requireAuth,
+  validateRequest,
+} from '@sonnytickets/common'
 import {body} from 'express-validator'
 import {TicketUpdatedPublisher} from '../events/publishers/ticket-updated-publisher'
 import {natsWrapper} from '../nats-wrapper'
@@ -31,6 +37,7 @@ router.put(
     ticket.set({
       title: req.body.title,
       price: req.body.price,
+      ...(req.body.status && {status: req.body.status}),
     })
 
     await ticket.save()

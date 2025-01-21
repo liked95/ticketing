@@ -8,6 +8,7 @@ import { getCurrentUser } from '@sonnytickets/common';
 import { showTicketRouter } from "./routes/show";
 import { indexTicketRouter } from "./routes";
 import { updateTicketRouter } from "./routes/update";
+import { meTicketRouter } from "./routes/me";
 import morgan from 'morgan'
 
 
@@ -26,6 +27,7 @@ app.use(
 
 app.use(getCurrentUser)
 app.use(createTicketRouter)
+app.use(meTicketRouter)
 app.use(showTicketRouter)
 app.use(indexTicketRouter)
 app.use(updateTicketRouter)

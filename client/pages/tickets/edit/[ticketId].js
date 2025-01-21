@@ -6,10 +6,12 @@ import { useState } from 'react';
 const TicketEdit = ({ ticket, currentUser }) => {
     const [title, setTitle] = useState(ticket.title);
     const [price, setPrice] = useState(ticket.price);
+    const [status, setStatus] = useState(ticket.status);
+     
     const { doRequest, errors } = useRequest({
         url: `/api/tickets/${ticket.id}`,
         method: 'put',
-        body: { title, price },
+        body: { title, price, status },
         onSuccess: () => Router.push(`/tickets/${ticket.id}`),
     });
 
@@ -66,6 +68,31 @@ const TicketEdit = ({ ticket, currentUser }) => {
                                         required
                                     />
                                 </div>
+
+                                <div className='form-group mt-3'>
+                                    <label className='form-label fw-bold'>Status</label>
+                                    <div className='form-check form-switch'>
+                                        <input
+                                            className='form-check-input'
+                                            type='checkbox'
+                                            role='switch'
+                                            id='statusToggle'
+                                            checked={status === 'listed'}
+                                            onChange={() =>
+                                                setStatus((prevStatus) =>
+                                                    prevStatus === 'listed' ? 'delisted' : 'listed'
+                                                )
+                                            }
+                                        />
+                                        <label
+                                            className='form-check-label'
+                                            htmlFor='statusToggle'
+                                        >
+                                            {status === 'listed' ? 'listed' : 'delisted'}
+                                        </label>
+                                    </div>
+                                </div>
+
                                 {errors && (
                                     <div className="alert alert-danger text-center mt-3">
                                         {errors}
